@@ -4,12 +4,7 @@ import logging
 import os
 
 # Initialize logger
-<<<<<<< HEAD
 logger = setup_logger(log_file='pipeline.log', __name__=__name__)
-=======
-logger = setup_logger(log_file='pipeline.log')
->>>>>>> 9d8a6c61a68ce31dbe5d2535296672cbc0d63661
-
 
 class Cleaner:
     """
