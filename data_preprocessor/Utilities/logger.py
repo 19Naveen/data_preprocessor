@@ -1,7 +1,7 @@
 import logging
 import os
 
-def setup_logger(log_dir='Logs', log_file='operations.log'):
+def setup_logger(log_dir='Logs', log_file='pipeline.log', __name__=__name__):
     """
     Set up and configure the logger for the data analysis operations.
     
