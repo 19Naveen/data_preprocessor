@@ -4,7 +4,7 @@ import logging
 import os
 
 # Initialize logger
-logger = setup_logger()
+logger = setup_logger(log_file='pipeline.log')
 
 
 class Cleaner:
@@ -36,7 +36,7 @@ class Cleaner:
         self.metadata = metadata if metadata is not None else {}
         self.metadata['cleaning_stats'] = self.metadata.get('cleaning_stats', cleaning_stats)
 
-    def drop_columns_with_many_nulls(self, df, threshold=0.7):
+    def _drop_columns_with_many_nulls(self, df, threshold=0.7):
         """
         Drop columns that have more null values than the specified threshold.
         
@@ -68,7 +68,7 @@ class Cleaner:
             df = df.drop(columns=columns_to_drop)
         return df
     
-    def drop_rows_with_many_nulls(self, df, threshold=0.7):
+    def _drop_rows_with_many_nulls(self, df, threshold=0.7):
         """
         Drop rows that have more null values than the specified threshold.
         
@@ -100,7 +100,7 @@ class Cleaner:
             self.metadata['cleaning_stats']['rows_dropped'] += rows_dropped
         return df
     
-    def drop_rows_with_null_target(self, df, target_column):
+    def _drop_rows_with_null_target(self, df, target_column):
         """
         Drop rows where the target column contains null values.
         
@@ -132,7 +132,7 @@ class Cleaner:
             self.metadata['cleaning_stats']['rows_dropped'] += rows_dropped
         return df
     
-    def remove_duplicates(self, df):
+    def _remove_duplicates(self, df):
         """
         Remove duplicate rows from the DataFrame.
         
@@ -195,11 +195,11 @@ class Cleaner:
         logger.info("-" * 50)
         logger.info(f"Starting data cleaning process on DataFrame with shape: {df.shape}")
         
-        df = self.drop_columns_with_many_nulls(df, threshold=column_threshold)
-        df = self.drop_rows_with_many_nulls(df, threshold=row_threshold)
+        df = self._drop_columns_with_many_nulls(df, threshold=column_threshold)
+        df = self._drop_rows_with_many_nulls(df, threshold=row_threshold)
         if target_column is not None:
-            df = self.drop_rows_with_null_target(df, target_column)
-        df = self.remove_duplicates(df)
+            df = self._drop_rows_with_null_target(df, target_column)
+        df = self._remove_duplicates(df)
         
         logger.info(f"Data cleaning completed. Final DataFrame shape: {df.shape}")
         logger.info(f"Cleaning summary: {self.get_cleaning_summary()}")
