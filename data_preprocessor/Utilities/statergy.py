@@ -95,3 +95,15 @@ np.sqrt(x) – square root transform for moderate skewness
 sklearn.preprocessing.power_transform(x, method='yeo-johnson') – handles both positive and negative skew; robust for many shapes
 arcsin_sqrt(x) = np.arcsin(np.sqrt(x)) – ideal for proportion/beta-type bounded distributions (e.g., values in [0, 1])
 '''
+
+
+        self.df = Outlier(self.metadata).transform(self.df)
+        logger.info("Outlier removal Completed...")
+
+        if not self.drop_null:
+            self.df = Imputer(self.metadata).transform(self.df, target_column=self.target_column)
+            logger.info("Imputation Completed...")
+
+        if self.normalize:
+            self.df = Normalizer(self.metadata).normalize(self.df)
+            logger.info("Normalization Completed...")

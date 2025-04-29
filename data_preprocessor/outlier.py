@@ -1,16 +1,16 @@
 import pandas as pd
 from Utilities.logger import setup_logger
+from typing import Optional
 logger = setup_logger(log_file='outlier.log', __name__=__name__)
 
 class Outlier:
 	"""
 	Class to handle outlier detection and removal.
 	"""
-
-	def __init__(self, metadata: dict = None):
+	def __init__(self, metadata: Optional[dict] = None):
 		self.metadata = metadata if metadata else {}
 		
-	def _IQR(df):
+	def _IQR(self, df: pd.DataFrame):
 		numeric_cols = df.select_dtypes(include=['float64', 'int64']).columns
 		for col in numeric_cols:
 			Q1 = df[col].quantile(0.25)
@@ -24,7 +24,7 @@ class Outlier:
 				df.drop(outliers.index, inplace=True)
 			return df
 
-	def _zscore_removal(df):
+	def _zscore_removal(self, df: pd.DataFrame):
 		numeric_cols = df.select_dtypes(include=['float64', 'int64']).columns
 		for col in numeric_cols:
 			z_scores = (df[col] - df[col].mean()) / df[col].std()

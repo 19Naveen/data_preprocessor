@@ -46,17 +46,6 @@ class Pipeline:
         Analyzer(self.metadata).analyze(self.df)
         logger.info("Analysis Completed...")
 
-        self.df = Outlier(self.metadata).transform(self.df)
-        logger.info("Outlier removal Completed...")
-
-        if not self.drop_null:
-            self.df = Imputer(self.metadata).transform(self.df, target_column=self.target_column)
-            logger.info("Imputation Completed...")
-
-        if self.normalize:
-            self.df = Normalizer(self.metadata).normalize(self.df)
-            logger.info("Normalization Completed...")
-
         logger.info("Pipeline completed successfully.")
         return self.df
 

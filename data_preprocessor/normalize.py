@@ -1,11 +1,11 @@
-from Utilities import setup_logger
+from Utilities.logger import setup_logger
 import pandas as pd
-from sklearn.preprocessing import MinMaxScaler, StandardScaler
+from sklearn.preprocessing import MinMaxScaler, StandardScaler, RobustScaler
 
 logger = setup_logger(log_file='normalize.log', __name__=__name__)
 
 class Normalizer:
-    def __init__(self, metadata: dict = None):
+    def __init__(self, metadata: Optional[dict] = None):
         self.metadata = metadata if metadata else {}
 
     def normalize(self, df: pd.DataFrame) -> pd.DataFrame:
