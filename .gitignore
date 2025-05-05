@@ -1,7 +1,5 @@
 __pycache__
-<<<<<<< HEAD
 .vscode
 __main__
-=======
-.vscode
->>>>>>> 9d8a6c61a68ce31dbe5d2535296672cbc0d63661
+package_venv
+.idea

@@ -107,7 +107,7 @@ class Loader:
             logger.exception("Failed to load Excel file.")
             raise
 
-    def load(self) -> pd.DataFrame:
+    def transform(self) -> pd.DataFrame:
         """
         Main interface method to load the file into a DataFrame.
 
@@ -134,3 +134,13 @@ class Loader:
             }
         self.metadata['file_info'] = self.metadata.get('file_info', result)
         return self.dataframe
+
+
+
+if __name__ == "__main__":
+    import os
+    path = os.path.join('Data', 'weather_classification_data.csv')
+    loader = Loader(path=path)
+    df = loader.transform()
+    print(df.head())
+    print(loader.metadata)

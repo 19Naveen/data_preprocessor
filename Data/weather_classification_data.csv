@@ -1,14 +1,14 @@
-Temperature,Humidity,Wind Speed,Precipitation (%),Cloud Cover,Atmospheric Pressure,UV Index,Season,Visibility (km),Location,Weather Type, Sea Level
+Temperature,Humidity,Wind Speed,Precipitation (%),Cloud Cover,Atmospheric Pressure,UV Index,Season,Visibility (km),Location,WeatherType, Sea Level
 14.0,73,9.5,82.0,partly cloudy,1010.82,2,Winter,3.5,inland,Rainy, 250
 39.0,96,8.5,71.0,partly cloudy,1011.43,7,Spring,10.0,inland,Cloudy
 30.0,64,7.0,16.0,clear,1018.72,5,Spring,5.5,mountain,Sunny
 38.0,83,1.5,82.0,clear,1026.25,7,Spring,1.0,coastal,Sunny
 27.0,74,17.0,66.0,overcast,990.67,1,Winter,2.5,mountain,Rainy
-32.0,55,3.5,26.0,overcast,1010.03,2,Summer,5.0,inland,Cloudy
--2.0,97,8.0,86.0,overcast,990.87,1,Winter,4.0,inland,Snowy
-3.0,85,6.0,96.0,partly cloudy,984.46,1,Winter,3.5,inland,Snowy
-3.0,83,6.0,66.0,overcast,999.44,0,Winter,1.0,mountain,Snowy
-28.0,74,8.5,107.0,clear,1012.13,8,Winter,7.5,coastal,Sunny
+32.0,55,3.5,,overcast,1010.03,2,Summer,5.0,inland,Cloudy
+-2.0,97,8.0,86.0,,990.87,1,Winter,4.0,inland,Snowy
+3.0,85,6.0,96.0,,984.46,1,Winter,3.5,inland,Snowy
+3.0,83,6.0,66.0,overcast,999.44,0,,1.0,mountain,Snowy
+28.0,74,8.5,107.0,clear,1012.13,8,Winter,,coastal,Sunny
 35.0,45,6.0,86.0,partly cloudy,879.88,2,Spring,1.0,mountain,Cloudy
 38.0,43,2.0,16.0,clear,1029.16,11,Autumn,7.5,inland,Sunny
 12.0,59,10.5,25.0,partly cloudy,1016.08,3,Autumn,5.5,mountain,Cloudy
