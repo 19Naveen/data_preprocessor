@@ -109,7 +109,6 @@ class Cleaner:
         """
         if not isinstance(df, pd.DataFrame):
             raise TypeError("Input must be a pandas DataFrame")
-        logger.info("-" * 50)
         logger.info(f"Starting data cleaning process on DataFrame with shape: {df.shape}")
         df = self._drop_columns_with_many_nulls(df, threshold=self.column_threshold)
         df = self._drop_rows_with_many_nulls(df, threshold=self.row_threshold)
