@@ -20,7 +20,7 @@ class Loader:
         ]
     }
 
-    def __init__(self, path: str, metadata: dict = None):
+    def __init__(self, path: str, metadata: dict = {}):
         """
         Initializes the Loader with a file path.
         Automatically detects the file format and encoding (for CSV).
@@ -106,8 +106,16 @@ class Loader:
         except Exception as e:
             logger.exception("Failed to load Excel file.")
             raise
+    
+    def _normalize_columns(self, df):
+        """
+        Normalizes column names by converting to lowercase and replacing spaces with underscores.
+        """
+        def process(name):
+            return name.lower().replace(' ', '_')
+        return df.rename(columns=process)
 
-    def load(self) -> pd.DataFrame:
+    def transform(self) -> pd.DataFrame:
         """
         Main interface method to load the file into a DataFrame.
 
@@ -132,5 +140,8 @@ class Loader:
                 'format': self.format,
                 'encoding': self.encoding
             }
+
+        logger.debug(f"Loader Summary: {result}")
+        # self.dataframe = self._normalize_columns(self.dataframe)
         self.metadata['file_info'] = self.metadata.get('file_info', result)
         return self.dataframe

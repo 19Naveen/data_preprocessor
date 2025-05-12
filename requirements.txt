@@ -3,3 +3,5 @@ scikit-learn>=1.0
 numpy>=1.21
 chardet
 fitter
+nltk
+pytest
