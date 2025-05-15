@@ -22,6 +22,7 @@ class Lazy_Prep:
         self.filepath: str = path
         self.target_column: str = target_column
         self.pipeline: list = [] 
+        self.config_parameters: dict = {}
         if not config:
             self._default_pipeline()
 
@@ -86,18 +87,43 @@ class Lazy_Prep:
         return df
     
     def _default_pipeline(self):
-        self.add_cleaner(column_threshold=0.80, row_threshold=0.80)
-        self.add_text_processor()
-        self.add_outlier_detection()
-        self.add_imputer(method_to_all_numeric='Mean', method_to_all_categorical='Mode')
+        if 'cleaner' in self.config_parameters:
+            self.add_cleaner(**self.config_parameters['cleaner'])
+        else:
+            self.add_cleaner(column_threshold=0.80, row_threshold=0.80)
+        
+        if 'text_processor' in self.config_parameters:
+            self.add_text_processor(**self.config_parameters['text_processor'])
+        else:
+            self.add_text_processor()
+        
+        if 'outlier' in self.config_parameters:
+            self.add_outlier_detection(**self.config_parameters['outlier'])
+        else:
+            self.add_outlier_detection()
+        
+        if 'imputer' in self.config_parameters:
+            self.add_imputer(**self.config_parameters['imputer'])
+        else:
+            self.add_imputer(method_to_all_numeric='Mean', method_to_all_categorical='Mode')
         logger.info("Default pipeline created with Cleaner, Outlier, Imputer, and TextProcessor components.")
 
-    def add_configurations(self, config: dict):
+
+    def add_configurations(self, cleaner_config=None, outlier_config=None, imputer_config=None, text_processor_config=None, date_config=None):
         """
-        Add configurations to the pipeline.
+        Add configurations for the components in the pipeline.
         """
-        self.metadata.update(config)
-        logger.info(f"Configurations added to pipeline: {config}")
+        if cleaner_config:
+            self.config_parameters['cleaner'] = cleaner_config
+        if outlier_config:
+            self.config_parameters['outlier'] = outlier_config
+        if imputer_config:
+            self.config_parameters['imputer'] = imputer_config
+        if text_processor_config:
+            self.config_parameters['text_processor'] = text_processor_config
+        if date_config:
+            self.config_parameters['date'] = date_config
+        logger.info(f"Configurations added: {self.config_parameters}")
 
     def load_metadata(self):
         """
