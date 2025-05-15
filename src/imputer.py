@@ -57,7 +57,7 @@ class Imputer:
 
     def _mean(self, df: pd.DataFrame, col: str):
         mean_val = df[col].mean()
-        df[col].fillna(mean_val, inplace=True)
+        df[col] = df[col].fillna(mean_val)
         logger.info(f"Filled missing in '{col}' with Mean: {mean_val}")
         return df
 
@@ -65,7 +65,7 @@ class Imputer:
         series = df[col]
         wins = mstats.winsorize(series.dropna(), limits=[0.05, 0.05])
         wm = wins.mean()
-        df[col].fillna(wm, inplace=True)
+        df[col] = df[col].fillna(wm)
         logger.info(f"Filled missing in '{col}' with Winsorized Mean: {wm}")
         return df
 
@@ -121,7 +121,7 @@ class Imputer:
         df['__cluster'] = clusters
         for cluster in np.unique(clusters):
             mask = (df['__cluster'] == cluster)
-            cluster_mean = df.loc[mask, col].mean()
+            cluster_mean = df.loc[mask, col].mean() # type: ignore
             df.loc[(df[col].isna()) & mask, col] = cluster_mean
         df.drop(columns='__cluster', inplace=True)
         logger.info(f"Filled missing in '{col}' using K-Means Imputation with {n_clusters} clusters")
@@ -144,10 +144,10 @@ class Imputer:
 
             method_name = self._check_method(method_name) 
             logger.info(f"Imputing numeric column '{col}' using method: {method_name}")
-            func = getattr(self, self.method_map.get(method_name, None), None)
+            func = getattr(self, self.method_map.get(method_name, None), None)  # type: ignore
             if callable(func):
                 try:
-                    df = func(df, col)
+                    df = func(df, col)   # type: ignore
                 except Exception as e:
                     logger.error(f"Error imputing column '{col}' using {method_name}: {e}")
             else:
@@ -155,16 +155,22 @@ class Imputer:
 
         # Impute categorical or non-numeric columns
         for col in df.select_dtypes(exclude=[np.number]).columns:
-            is_target = col == self.metadata.get('target_column')
-            is_categorical = columns_details.get(col, {}).get('dtype') == 'categorical_columns'
-            if is_target or is_categorical:
+            is_target = (col == self.metadata.get('target_column'))
+            if is_target:
+                logger.info(f"Skipping target column '{col}'")
+                continue
+        
+            default_method = self.method_to_all_categorical if not self.method_to_all_numeric else 'Mode'
+            method_name = self.method_map_to_column.get(col, default_method)
+            
+            if method_name == 'Mode':
                 mode_series = df[col].mode()
                 if not mode_series.empty:
                     mode_value = mode_series.iloc[0]
                     df[col] = df[col].fillna(mode_value)
                     logger.info(f"Filled missing values in '{col}' with mode: {mode_value}")
-                else:
-                    logger.warning(f"Cannot impute '{col}': No mode found (column might be entirely NaN).")
-
+            else:
+                df[col] = df[col].fillna('Missing')
+                logger.info(f"Filled missing values in '{col}' with Default Value 'Missing'")
         logger.info("Imputation completed.")
         return df

@@ -6,17 +6,9 @@ from fitter import Fitter, get_common_distributions
 from pathlib import Path
 import json
 from Utilities.statergy import strategies
+from Utilities.logger import setup_logger
 
-# Set up logging
-LOG_DIR = Path('Logs')
-LOG_DIR.mkdir(exist_ok=True)
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-file_handler = logging.FileHandler(LOG_DIR / 'pipeline.log')
-file_handler.setFormatter(formatter)
-if not logger.hasHandlers():
-    logger.addHandler(file_handler)
+logger = setup_logger(log_file='pipeline.log', __name__=__name__)
 
 class CustomError(Exception):
     pass
@@ -74,6 +66,7 @@ class Analyzer:
         return self.metadata
 
     def analyze(self, df: pd.DataFrame) -> dict:
+        logger.info(f"-----------------Applying Default component: Analyzer-------------------")
         try:
             return self.column_details(df)
         except Exception as e:

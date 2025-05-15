@@ -25,7 +25,6 @@ class Loader:
         Initializes the Loader with a file path.
         Automatically detects the file format and encoding (for CSV).
         """
-        logger.info('-'*50)
         logger.info(f"Initializing Loader for path: {path}")
         self.path = path
         self.format = self._detect_file_format()
@@ -76,7 +75,7 @@ class Loader:
             logger.debug("Detecting file encoding...")
             with open(self.path, 'rb') as file:
                 raw_data = file.read(4096)
-            encoding = chardet.detect(raw_data)['encoding']
+            encoding: str = chardet.detect(raw_data)['encoding']
             logger.info(f"Detected file encoding: {encoding}")
             return encoding
         except Exception as e:
@@ -125,6 +124,8 @@ class Loader:
         Raises:
             ValueError: If the file format is not supported.
         """
+
+        logger.info(f"-----------------Applying Default component: Loader-------------------")
         loaders = {
             'csv': self._load_csv,
             'xlsx': self._load_xlsx
@@ -141,7 +142,8 @@ class Loader:
                 'encoding': self.encoding
             }
 
-        logger.debug(f"Loader Summary: {result}")
+        logger.info(f"Loader Summary: {result}")
+
         # self.dataframe = self._normalize_columns(self.dataframe)
         self.metadata['file_info'] = self.metadata.get('file_info', result)
         return self.dataframe
