@@ -11,10 +11,9 @@ from Utilities.logger import setup_logger
 logger = setup_logger(log_file='pipeline.log', __name__=__name__)
 
 class TextProcessor:
-    def __init__(self, text_data_columns=[], date_time_columns=[], metadata={}):
+    def __init__(self, text_data_columns=[], metadata={}):
         self.metadata = metadata
         self.lemmatizer = WordNetLemmatizer()
-        self.date_time_columns = date_time_columns
         self.text_data_columns = text_data_columns
         self.stop_words = set(stopwords.words('english'))
 

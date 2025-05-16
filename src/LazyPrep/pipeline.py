@@ -4,22 +4,22 @@ import logging
 import shutil
 import pandas as pd
 from typing import Dict, List, Optional, Any, Union
-from loader import Loader
-from cleaner import Cleaner
-from analyzer import Analyzer
-from outlier import Outlier
-from imputer import Imputer
-from text_processor import TextProcessor
-from Utilities.logger import setup_logger
+from LazyPrep.loader import Loader
+from LazyPrep.cleaner import Cleaner
+from LazyPrep.analyzer import Analyzer
+from LazyPrep.outlier import Outlier
+from LazyPrep.imputer import Imputer
+from LazyPrep.text_processor import TextProcessor
+from LazyPrep.Utilities.logger import setup_logger
 
 logger = setup_logger(log_file='pipeline.log', __name__=__name__)
 
-class Lazy_Prep:
+class Transformer:
     """
     Data preprocessing pipeline that encapsulates loading, imputing, and cleaning steps.
     """
 
-    def __init__(self, path: str, target_column: str = '', config: bool = False, config_file: str = None):
+    def __init__(self, path: str, target_column: str = '', config: bool = False, config_file: str = ''):
         self.metadata: Dict[str, Any] = {}
         self.filepath: str = path
         self.target_column: str = target_column
@@ -177,37 +177,6 @@ class Lazy_Prep:
         
         # Rebuild pipeline with new configurations
         self._default_pipeline()
-    
-    def load_config_from_file(self, config_file: str) -> None:
-        """
-        Load configurations from a JSON file.
-        
-        Args:
-            config_file: Path to the configuration file
-        """
-        try:
-            with open(config_file, 'r') as f:
-                config = json.load(f)
-                self.add_configurations(**config)
-            logger.info(f"Configurations loaded from {config_file}")
-        except Exception as e:
-            logger.error(f"Error loading configuration from {config_file}: {str(e)}")
-            raise
-    
-    def save_config_to_file(self, config_file: str) -> None:
-        """
-        Save current configurations to a JSON file.
-        
-        Args:
-            config_file: Path to save the configuration
-        """
-        try:
-            with open(config_file, 'w') as f:
-                json.dump(self.config_parameters, f, indent=4)
-            logger.info(f"Configurations saved to {config_file}")
-        except Exception as e:
-            logger.error(f"Error saving configuration to {config_file}: {str(e)}")
-            raise
 
     def load_metadata(self) -> str:
         """
@@ -244,3 +213,17 @@ class Lazy_Prep:
             print('No log file created yet... Use the transform function to generate it')
 
 
+if __name__ == "__main__":  
+    import os
+    import json
+
+    path = os.path.join('Data', 'weather_classification_data.csv')
+    pipeline = Transformer(path=path, target_column='WeatherType', config=False)
+
+    df = pipeline.transform()
+    print(df.head())
+    
+    metadata = pipeline.load_metadata()
+    print(metadata)
+    print(df.head())
+    print(df.info())

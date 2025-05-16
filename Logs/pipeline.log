@@ -1,0 +1,189 @@
+2025-05-15 12:43:30,196 - __main__ - INFO - Cleaner component added with column_threshold: 0.8, row_threshold: 0.8
+2025-05-15 12:43:30,439 - __main__ - INFO - TextProcessor component added with text_data_columns: []
+2025-05-15 12:43:30,439 - __main__ - INFO - Imputer component added with method_to_all_numeric: Mean, method_to_all_categorical: Mode
+2025-05-15 12:43:30,439 - __main__ - INFO - Default pipeline created with Cleaner, Outlier, Imputer, and TextProcessor components.
+2025-05-15 12:43:30,439 - __main__ - INFO - ==================Processing starts===================
+2025-05-15 12:43:30,439 - loader - INFO - Initializing Loader for path: Data\weather_classification_data.csv
+2025-05-15 12:43:30,467 - loader - INFO - Detected file format: csv
+2025-05-15 12:43:30,469 - loader - INFO - Detected file encoding: ascii
+2025-05-15 12:43:30,469 - loader - INFO - -----------------Applying Default component: Loader-------------------
+2025-05-15 12:43:30,469 - loader - INFO - Loading file with format: csv
+2025-05-15 12:43:30,469 - loader - INFO - Loading CSV file: Data\weather_classification_data.csv
+2025-05-15 12:43:30,487 - loader - INFO - CSV file loaded successfully.
+2025-05-15 12:43:30,487 - loader - INFO - Loader Summary: {'path': 'Data\\weather_classification_data.csv', 'format': 'csv', 'encoding': 'ascii'}
+2025-05-15 12:43:30,487 - analyzer - INFO - -----------------Applying Default component: Analyzer-------------------
+2025-05-15 12:43:30,487 - analyzer - INFO - Analyzing column: Temperature with dtype: float64
+2025-05-15 12:43:32,888 - analyzer - INFO - Distribution analysis for Temperature: {'Distribution': 'norm', 'Parameters': {'loc': 18.496, 'scale': 17.422953748814617}}
+2025-05-15 12:43:32,888 - analyzer - INFO - Analyzing column: Humidity with dtype: float64
+2025-05-15 12:43:33,874 - analyzer - INFO - Distribution analysis for Humidity: {'Distribution': 'exponpow', 'Parameters': {'b': 2.610170191346109, 'loc': 7.569085308860512, 'scale': 79.98106308144284}}
+2025-05-15 12:43:33,875 - analyzer - INFO - Analyzing column: Wind Speed with dtype: float64
+2025-05-15 12:43:34,094 - analyzer - INFO - Distribution analysis for Wind Speed: {'Distribution': 'rayleigh', 'Parameters': {'loc': -1.746899625031174, 'scale': 9.618052354448087}}
+2025-05-15 12:43:34,094 - analyzer - INFO - Analyzing column: Precipitation (%) with dtype: float64
+2025-05-15 12:43:34,271 - analyzer - INFO - Distribution analysis for Precipitation (%): {'Distribution': 'uniform', 'Parameters': {'loc': 0.0, 'scale': 109.0}}
+2025-05-15 12:43:34,272 - analyzer - INFO - Analyzing column: Cloud Cover with dtype: object
+2025-05-15 12:43:34,273 - analyzer - INFO - Analyzing column: Atmospheric Pressure with dtype: float64
+2025-05-15 12:43:34,406 - analyzer - INFO - Distribution analysis for Atmospheric Pressure: {'Distribution': 'cauchy', 'Parameters': {'loc': 1007.6298901427467, 'scale': 9.903092416196078}}
+2025-05-15 12:43:34,406 - analyzer - INFO - Analyzing column: UV Index with dtype: float64
+2025-05-15 12:43:34,582 - analyzer - INFO - Distribution analysis for UV Index: {'Distribution': 'gamma', 'Parameters': {'a': 0.6182272992198927, 'loc': -2.5315295541115906e-26, 'scale': 4.527043471643557}}
+2025-05-15 12:43:34,582 - analyzer - INFO - Analyzing column: Season with dtype: object
+2025-05-15 12:43:34,584 - analyzer - INFO - Analyzing column: Visibility (km) with dtype: float64
+2025-05-15 12:43:34,728 - analyzer - INFO - Distribution analysis for Visibility (km): {'Distribution': 'gamma', 'Parameters': {'a': 2.56705075505423, 'loc': -0.06715068436501355, 'scale': 2.148040425972852}}
+2025-05-15 12:43:34,729 - analyzer - INFO - Analyzing column: Location with dtype: object
+2025-05-15 12:43:34,730 - analyzer - INFO - Analyzing column: WeatherType with dtype: object
+2025-05-15 12:43:34,731 - analyzer - INFO - Analyzing column:  Sea Level with dtype: float64
+2025-05-15 12:43:34,864 - analyzer - INFO - Distribution analysis for  Sea Level: {'Distribution': 'chi2', 'Parameters': {'df': 1.046913194428349, 'loc': 249.99999999999994, 'scale': 0.9574397545422058}}
+2025-05-15 12:43:34,864 - __main__ - INFO - Initial DataFrame loaded with shape: (13200, 12)
+2025-05-15 12:43:34,866 - __main__ - INFO - -----------------Applying component: Cleaner-------------------
+2025-05-15 12:43:34,866 - cleaner - INFO - Starting data cleaning process on DataFrame with shape: (13200, 12)
+2025-05-15 12:43:34,868 - cleaner - INFO - Dropping 1 columns with null ratio > 0.8: [' Sea Level']
+2025-05-15 12:43:34,872 - cleaner - INFO - Dropped 1 rows with null ratio > 0.8
+2025-05-15 12:43:34,874 - cleaner - INFO - Dropped 1 rows with null values in target column 'WeatherType'
+2025-05-15 12:43:34,877 - cleaner - INFO - Data cleaning completed. Final DataFrame shape: (13198, 11)
+2025-05-15 12:43:34,877 - cleaner - INFO - Cleaning summary: {'columns_dropped': [' Sea Level'], 'rows_dropped': 2, 'duplicates_removed': 0}
+2025-05-15 12:43:34,878 - __main__ - INFO - -----------------Applying component: TextProcessor-------------------
+2025-05-15 12:43:34,878 - text_processor - INFO - Proccessing column: Cloud Cover
+2025-05-15 12:43:34,881 - text_processor - INFO - Proccessing column: Season
+2025-05-15 12:43:34,884 - text_processor - INFO - Proccessing column: Location
+2025-05-15 12:43:34,887 - text_processor - INFO - Proccessing column: WeatherType
+2025-05-15 12:43:34,890 - __main__ - INFO - -----------------Applying component: Outlier-------------------
+2025-05-15 12:43:34,890 - outlier - INFO - Temperature is numeric_columns... Executing Z-score.....
+2025-05-15 12:43:34,891 - outlier - INFO - Warning: Found 92 outliers in column 'Temperature' (Z-score). Dropping them.
+2025-05-15 12:43:34,892 - outlier - INFO - Humidity is numeric_columns... Executing Percentile.....
+2025-05-15 12:43:34,893 - outlier - INFO - Warning: Found 201 outliers in column 'Humidity' (Percentile). Dropping them.
+2025-05-15 12:43:34,894 - outlier - INFO - Wind Speed is numeric_columns... Executing Modified Z-score.....
+2025-05-15 12:43:34,895 - outlier - INFO - Warning: Found 192 outliers in column 'Wind Speed' (Modified Z-score). Dropping them.
+2025-05-15 12:43:34,896 - outlier - INFO - Precipitation (%) is numeric_columns... Executing Range-based.....
+2025-05-15 12:43:34,897 - outlier - INFO - Warning: Found 155 outliers in column 'Precipitation (%)' (Range-based). Dropping them.
+2025-05-15 12:43:34,898 - outlier - INFO - Cloud Cover is categorical_columns or Target Column so skipping it
+2025-05-15 12:43:34,898 - outlier - INFO - Atmospheric Pressure is numeric_columns... Executing MAD.....
+2025-05-15 12:43:34,899 - outlier - INFO - Warning: Found 977 outliers in column 'Atmospheric Pressure' (MAD). Dropping them.
+2025-05-15 12:43:34,899 - outlier - INFO - UV Index is numeric_columns... Executing Modified Z-score.....
+2025-05-15 12:43:34,900 - outlier - INFO - Warning: Found 201 outliers in column 'UV Index' (Modified Z-score). Dropping them.
+2025-05-15 12:43:34,901 - outlier - INFO - Season is categorical_columns or Target Column so skipping it
+2025-05-15 12:43:34,901 - outlier - INFO - Visibility (km) is numeric_columns... Executing Modified Z-score.....
+2025-05-15 12:43:34,902 - outlier - INFO - Location is categorical_columns or Target Column so skipping it
+2025-05-15 12:43:34,902 - outlier - INFO - WeatherType is categorical_columns or Target Column so skipping it
+2025-05-15 12:43:34,902 - outlier - INFO - Outlier detection and removal completed. Total Removed rows 1818
+2025-05-15 12:43:34,902 - __main__ - INFO - -----------------Applying component: Imputer-------------------
+2025-05-15 12:43:34,903 - imputer - INFO - Imputing numeric column 'Temperature' using method: Mean
+2025-05-15 12:43:34,903 - imputer - INFO - Filled missing in 'Temperature' with Mean: 18.70694200351494
+2025-05-15 12:43:34,903 - imputer - INFO - Imputing numeric column 'Humidity' using method: KNNImputer
+2025-05-15 12:43:34,909 - imputer - INFO - Applied KNNImputer on numeric features
+2025-05-15 12:43:34,909 - imputer - INFO - Imputing numeric column 'Wind Speed' using method: IterativeImputer(estimator=BayesianRidge())
+2025-05-15 12:43:34,937 - imputer - INFO - Applied IterativeImputer(BayesianRidge) on numeric features
+2025-05-15 12:43:34,937 - imputer - INFO - Imputing numeric column 'Precipitation (%)' using method: K-Means Imputation
+2025-05-15 12:43:35,143 - imputer - INFO - Filled missing in 'Precipitation (%)' using K-Means Imputation with 5 clusters
+2025-05-15 12:43:35,143 - imputer - INFO - Imputing numeric column 'Atmospheric Pressure' using method: Winsorized Mean
+2025-05-15 12:43:35,144 - imputer - INFO - Filled missing in 'Atmospheric Pressure' with Winsorized Mean: 1006.0237873462214
+2025-05-15 12:43:35,144 - imputer - INFO - Imputing numeric column 'UV Index' using method: Bayesian Imputation (Gamma Prior)
+2025-05-15 12:43:35,172 - imputer - INFO - Applied IterativeImputer(BayesianRidge) on numeric features
+2025-05-15 12:43:35,172 - imputer - INFO - Imputing numeric column 'Visibility (km)' using method: Bayesian Imputation (Gamma Prior)
+2025-05-15 12:43:35,200 - imputer - INFO - Applied IterativeImputer(BayesianRidge) on numeric features
+2025-05-15 12:43:35,205 - imputer - INFO - Filled missing values in 'Cloud Cover' with mode: overcast
+2025-05-15 12:43:35,206 - imputer - INFO - Filled missing values in 'Season' with mode: winter
+2025-05-15 12:43:35,208 - imputer - INFO - Filled missing values in 'Location' with mode: inland
+2025-05-15 12:43:35,208 - imputer - INFO - Skipping target column 'WeatherType'
+2025-05-15 12:43:35,208 - imputer - INFO - Imputation completed.
+2025-05-15 12:43:35,208 - __main__ - INFO - ==================Processing ends===================
+2025-05-15 12:46:02,836 - __main__ - INFO - Cleaner component added with column_threshold: 0.8, row_threshold: 0.8
+2025-05-15 12:46:03,072 - __main__ - INFO - TextProcessor component added with text_data_columns: []
+2025-05-15 12:46:03,072 - __main__ - INFO - Imputer component added with method_to_all_numeric: Mean, method_to_all_categorical: Mode
+2025-05-15 12:46:03,072 - __main__ - INFO - Default pipeline created with Cleaner, Outlier, Imputer, and TextProcessor components.
+2025-05-15 12:46:03,072 - __main__ - INFO - ==================Processing starts===================
+2025-05-15 12:46:03,072 - loader - INFO - Initializing Loader for path: Data\weather_classification_data.csv
+2025-05-15 12:46:03,098 - loader - INFO - Detected file format: csv
+2025-05-15 12:46:03,100 - loader - INFO - Detected file encoding: ascii
+2025-05-15 12:46:03,100 - loader - INFO - -----------------Applying Default component: Loader-------------------
+2025-05-15 12:46:03,100 - loader - INFO - Loading file with format: csv
+2025-05-15 12:46:03,100 - loader - INFO - Loading CSV file: Data\weather_classification_data.csv
+2025-05-15 12:46:03,114 - loader - INFO - CSV file loaded successfully.
+2025-05-15 12:46:03,114 - loader - INFO - Loader Summary: {'path': 'Data\\weather_classification_data.csv', 'format': 'csv', 'encoding': 'ascii'}
+2025-05-15 12:46:03,114 - analyzer - INFO - -----------------Applying Default component: Analyzer-------------------
+2025-05-15 12:46:03,114 - analyzer - INFO - Analyzing column: Temperature with dtype: float64
+2025-05-15 12:46:05,398 - analyzer - INFO - Distribution analysis for Temperature: {'Distribution': 'norm', 'Parameters': {'loc': 18.496, 'scale': 17.422953748814617}}
+2025-05-15 12:46:05,398 - analyzer - INFO - Analyzing column: Humidity with dtype: float64
+2025-05-15 12:46:06,357 - analyzer - INFO - Distribution analysis for Humidity: {'Distribution': 'exponpow', 'Parameters': {'b': 2.610170191346109, 'loc': 7.569085308860512, 'scale': 79.98106308144284}}
+2025-05-15 12:46:06,358 - analyzer - INFO - Analyzing column: Wind Speed with dtype: float64
+2025-05-15 12:46:06,534 - analyzer - INFO - Distribution analysis for Wind Speed: {'Distribution': 'rayleigh', 'Parameters': {'loc': -1.746899625031174, 'scale': 9.618052354448087}}
+2025-05-15 12:46:06,534 - analyzer - INFO - Analyzing column: Precipitation (%) with dtype: float64
+2025-05-15 12:46:06,709 - analyzer - INFO - Distribution analysis for Precipitation (%): {'Distribution': 'uniform', 'Parameters': {'loc': 0.0, 'scale': 109.0}}
+2025-05-15 12:46:06,709 - analyzer - INFO - Analyzing column: Cloud Cover with dtype: object
+2025-05-15 12:46:06,710 - analyzer - INFO - Analyzing column: Atmospheric Pressure with dtype: float64
+2025-05-15 12:46:06,846 - analyzer - INFO - Distribution analysis for Atmospheric Pressure: {'Distribution': 'cauchy', 'Parameters': {'loc': 1007.6298901427467, 'scale': 9.903092416196078}}
+2025-05-15 12:46:06,846 - analyzer - INFO - Analyzing column: UV Index with dtype: float64
+2025-05-15 12:46:07,014 - analyzer - INFO - Distribution analysis for UV Index: {'Distribution': 'gamma', 'Parameters': {'a': 0.6182272992198927, 'loc': -2.5315295541115906e-26, 'scale': 4.527043471643557}}
+2025-05-15 12:46:07,014 - analyzer - INFO - Analyzing column: Season with dtype: object
+2025-05-15 12:46:07,016 - analyzer - INFO - Analyzing column: Visibility (km) with dtype: float64
+2025-05-15 12:46:07,152 - analyzer - INFO - Distribution analysis for Visibility (km): {'Distribution': 'gamma', 'Parameters': {'a': 2.56705075505423, 'loc': -0.06715068436501355, 'scale': 2.148040425972852}}
+2025-05-15 12:46:07,152 - analyzer - INFO - Analyzing column: Location with dtype: object
+2025-05-15 12:46:07,153 - analyzer - INFO - Analyzing column: WeatherType with dtype: object
+2025-05-15 12:46:07,154 - analyzer - INFO - Analyzing column:  Sea Level with dtype: float64
+2025-05-15 12:46:07,246 - analyzer - INFO - Distribution analysis for  Sea Level: {'Distribution': 'chi2', 'Parameters': {'df': 1.046913194428349, 'loc': 249.99999999999994, 'scale': 0.9574397545422058}}
+2025-05-15 12:46:07,247 - __main__ - INFO - Initial DataFrame loaded with shape: (13200, 12)
+2025-05-15 12:46:07,247 - __main__ - INFO - -----------------Applying component: Cleaner-------------------
+2025-05-15 12:46:07,247 - cleaner - INFO - Starting data cleaning process on DataFrame with shape: (13200, 12)
+2025-05-15 12:46:07,248 - cleaner - INFO - Dropping 1 columns with null ratio > 0.8: [' Sea Level']
+2025-05-15 12:46:07,253 - cleaner - INFO - Dropped 1 rows with null ratio > 0.8
+2025-05-15 12:46:07,255 - cleaner - INFO - Dropped 1 rows with null values in target column 'WeatherType'
+2025-05-15 12:46:07,259 - cleaner - INFO - Data cleaning completed. Final DataFrame shape: (13198, 11)
+2025-05-15 12:46:07,259 - cleaner - INFO - Cleaning summary: {'columns_dropped': [' Sea Level'], 'rows_dropped': 2, 'duplicates_removed': 0}
+2025-05-15 12:46:07,259 - __main__ - INFO - -----------------Applying component: TextProcessor-------------------
+2025-05-15 12:46:07,259 - text_processor - INFO - Proccessing column: Cloud Cover
+2025-05-15 12:46:07,263 - text_processor - INFO - Proccessing column: Season
+2025-05-15 12:46:07,266 - text_processor - INFO - Proccessing column: Location
+2025-05-15 12:46:07,269 - text_processor - INFO - Proccessing column: WeatherType
+2025-05-15 12:46:07,272 - __main__ - INFO - -----------------Applying component: Outlier-------------------
+2025-05-15 12:46:07,272 - outlier - INFO - Temperature is numeric_columns... Executing Z-score.....
+2025-05-15 12:46:07,273 - outlier - INFO - Warning: Found 92 outliers in column 'Temperature' (Z-score). Dropping them.
+2025-05-15 12:46:07,274 - outlier - INFO - Humidity is numeric_columns... Executing Percentile.....
+2025-05-15 12:46:07,275 - outlier - INFO - Warning: Found 201 outliers in column 'Humidity' (Percentile). Dropping them.
+2025-05-15 12:46:07,276 - outlier - INFO - Wind Speed is numeric_columns... Executing Modified Z-score.....
+2025-05-15 12:46:07,277 - outlier - INFO - Warning: Found 192 outliers in column 'Wind Speed' (Modified Z-score). Dropping them.
+2025-05-15 12:46:07,278 - outlier - INFO - Precipitation (%) is numeric_columns... Executing Range-based.....
+2025-05-15 12:46:07,279 - outlier - INFO - Warning: Found 155 outliers in column 'Precipitation (%)' (Range-based). Dropping them.
+2025-05-15 12:46:07,280 - outlier - INFO - Cloud Cover is categorical_columns or Target Column so skipping it
+2025-05-15 12:46:07,280 - outlier - INFO - Atmospheric Pressure is numeric_columns... Executing MAD.....
+2025-05-15 12:46:07,281 - outlier - INFO - Warning: Found 977 outliers in column 'Atmospheric Pressure' (MAD). Dropping them.
+2025-05-15 12:46:07,282 - outlier - INFO - UV Index is numeric_columns... Executing Modified Z-score.....
+2025-05-15 12:46:07,283 - outlier - INFO - Warning: Found 201 outliers in column 'UV Index' (Modified Z-score). Dropping them.
+2025-05-15 12:46:07,284 - outlier - INFO - Season is categorical_columns or Target Column so skipping it
+2025-05-15 12:46:07,284 - outlier - INFO - Visibility (km) is numeric_columns... Executing Modified Z-score.....
+2025-05-15 12:46:07,286 - outlier - INFO - Location is categorical_columns or Target Column so skipping it
+2025-05-15 12:46:07,286 - outlier - INFO - WeatherType is categorical_columns or Target Column so skipping it
+2025-05-15 12:46:07,286 - outlier - INFO - Outlier detection and removal completed. Total Removed rows 1818
+2025-05-15 12:46:07,286 - __main__ - INFO - -----------------Applying component: Imputer-------------------
+2025-05-15 12:46:07,286 - imputer - INFO - Imputing numeric column 'Temperature' using method: Mean
+2025-05-15 12:46:07,286 - imputer - INFO - Filled missing in 'Temperature' with Mean: 18.70694200351494
+2025-05-15 12:46:07,286 - imputer - INFO - Imputing numeric column 'Humidity' using method: KNNImputer
+2025-05-15 12:46:07,292 - imputer - INFO - Applied KNNImputer on numeric features
+2025-05-15 12:46:07,292 - imputer - INFO - Imputing numeric column 'Wind Speed' using method: IterativeImputer(estimator=BayesianRidge())
+2025-05-15 12:46:07,321 - imputer - INFO - Applied IterativeImputer(BayesianRidge) on numeric features
+2025-05-15 12:46:07,322 - imputer - INFO - Imputing numeric column 'Precipitation (%)' using method: K-Means Imputation
+2025-05-15 12:46:07,521 - imputer - INFO - Filled missing in 'Precipitation (%)' using K-Means Imputation with 5 clusters
+2025-05-15 12:46:07,521 - imputer - INFO - Imputing numeric column 'Atmospheric Pressure' using method: Winsorized Mean
+2025-05-15 12:46:07,523 - imputer - INFO - Filled missing in 'Atmospheric Pressure' with Winsorized Mean: 1006.0237873462214
+2025-05-15 12:46:07,523 - imputer - INFO - Imputing numeric column 'UV Index' using method: Bayesian Imputation (Gamma Prior)
+2025-05-15 12:46:07,543 - imputer - INFO - Applied IterativeImputer(BayesianRidge) on numeric features
+2025-05-15 12:46:07,544 - imputer - INFO - Imputing numeric column 'Visibility (km)' using method: Bayesian Imputation (Gamma Prior)
+2025-05-15 12:46:07,564 - imputer - INFO - Applied IterativeImputer(BayesianRidge) on numeric features
+2025-05-15 12:46:07,567 - imputer - INFO - Filled missing values in 'Cloud Cover' with mode: overcast
+2025-05-15 12:46:07,568 - imputer - INFO - Filled missing values in 'Season' with mode: winter
+2025-05-15 12:46:07,569 - imputer - INFO - Filled missing values in 'Location' with mode: inland
+2025-05-15 12:46:07,569 - imputer - INFO - Skipping target column 'WeatherType'
+2025-05-15 12:46:07,569 - imputer - INFO - Imputation completed.
+2025-05-15 12:46:07,569 - __main__ - INFO - ==================Processing ends===================
+2025-05-15 12:55:43,386 - __main__ - INFO - Cleaner component added with column_threshold: 0.8, row_threshold: 0.8
+2025-05-15 12:55:43,620 - __main__ - INFO - TextProcessor component added with text_data_columns: []
+2025-05-15 12:55:43,620 - __main__ - INFO - Imputer component added with method_to_all_numeric: Mean, method_to_all_categorical: Mode
+2025-05-15 12:55:43,620 - __main__ - INFO - Default pipeline created with Cleaner, Outlier, Imputer, and TextProcessor components.
+2025-05-15 12:55:43,620 - __main__ - INFO - ==================Processing starts===================
+2025-05-15 12:55:43,620 - loader - INFO - Initializing Loader for path: Data\weather_classification_data.csv
+2025-05-15 12:55:43,649 - loader - INFO - Detected file format: csv
+2025-05-15 12:55:43,650 - loader - INFO - Detected file encoding: ascii
+2025-05-15 12:55:43,650 - loader - INFO - -----------------Applying Default component: Loader-------------------
+2025-05-15 12:55:43,650 - loader - INFO - Loading file with format: csv
+2025-05-15 12:55:43,650 - loader - INFO - Loading CSV file: Data\weather_classification_data.csv
+2025-05-15 12:55:43,666 - loader - INFO - CSV file loaded successfully.
+2025-05-15 12:55:43,666 - loader - INFO - Loader Summary: {'path': 'Data\\weather_classification_data.csv', 'format': 'csv', 'encoding': 'ascii'}
+2025-05-15 12:55:43,666 - analyzer - INFO - -----------------Applying Default component: Analyzer-------------------
+2025-05-15 12:55:43,666 - analyzer - INFO - Analyzing column: Temperature with dtype: float64

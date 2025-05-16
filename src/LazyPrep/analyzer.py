@@ -5,7 +5,7 @@ import numpy as np
 from fitter import Fitter, get_common_distributions
 from pathlib import Path
 import json
-from Utilities.statergy import strategies
+from LazyPrep.Utilities.strategy import strategies
 from Utilities.logger import setup_logger
 
 logger = setup_logger(log_file='pipeline.log', __name__=__name__)

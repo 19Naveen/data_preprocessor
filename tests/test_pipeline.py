@@ -5,7 +5,7 @@ import pandas as pd
 import tempfile
 import shutil
 from unittest.mock import patch, MagicMock
-from src.pipeline import Lazy_Prep
+from src.LazyPrep.pipeline import Lazy_Prep
 
 if __name__ == "__main__":  
     path = os.path.join('Data', 'weather_classification_data.csv')
