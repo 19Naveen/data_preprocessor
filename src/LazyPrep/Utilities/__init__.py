@@ -1,6 +1,6 @@
 """Utility functions and classes for LazyPrep."""
 
-from .logger import setup_logger
-from .strategy import strategies
+from LazyPrep.Utilities.logger import setup_logger
+from LazyPrep.Utilities.strategy import strategies
 
 __all__ = ['setup_logger', 'strategies']

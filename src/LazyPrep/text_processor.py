@@ -5,7 +5,7 @@ import numpy as np
 from nltk.tokenize import word_tokenize, sent_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
-from Utilities.logger import setup_logger
+from .Utilities.logger import setup_logger
 
 # Setup logger
 logger = setup_logger(log_file='pipeline.log', __name__=__name__)
@@ -57,4 +57,3 @@ class TextProcessor:
                 else:
                     column_details[col]['text_type'] = 'Nominal/Ordinal_Data'
         return df
-        

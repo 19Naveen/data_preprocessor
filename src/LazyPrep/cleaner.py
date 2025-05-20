@@ -3,7 +3,7 @@ import pandas as pd
 from typing import Optional
 
 import logging
-from Utilities.logger import setup_logger
+from .Utilities.logger import setup_logger
 
 logger = setup_logger(log_file='pipeline.log', __name__=__name__)
 

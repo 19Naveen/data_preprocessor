@@ -3,7 +3,7 @@ import logging
 import mimetypes
 import chardet
 import pandas as pd
-from Utilities.logger import setup_logger
+from .Utilities.logger import setup_logger
 logger = setup_logger(log_file='pipeline.log', __name__=__name__)
 
 class Loader:

@@ -130,10 +130,6 @@ class Transformer:
         else:
             self.add_cleaner(column_threshold=0.80, row_threshold=0.80)
         
-        if 'text_processor' in self.config_parameters:
-            self.add_text_processor(**self.config_parameters['text_processor'])
-        else:
-            self.add_text_processor()
         
         if 'outlier' in self.config_parameters:
             self.add_outlier_detection(**self.config_parameters['outlier'])
@@ -178,7 +174,7 @@ class Transformer:
         # Rebuild pipeline with new configurations
         self._default_pipeline()
 
-    def load_metadata(self) -> str:
+    def return_metadata(self) -> str:
         """
         Get the current metadata as a JSON string.
         
@@ -189,6 +185,11 @@ class Transformer:
 
     def return_pipeline(self) -> None:
         """Print the current components in the pipeline."""
+        print("===================COMPONENTS================")
+        print("Default Components:")
+        print('-'*25)
+        print('Loader\nAnalyzer')
+        print('-'*25)
         print("Components in Pipeline:")
         print('-'*25)
         for component in self.pipeline:
@@ -212,18 +213,3 @@ class Transformer:
         else:
             print('No log file created yet... Use the transform function to generate it')
 
-
-if __name__ == "__main__":  
-    import os
-    import json
-
-    path = os.path.join('Data', 'weather_classification_data.csv')
-    pipeline = Transformer(path=path, target_column='WeatherType', config=False)
-
-    df = pipeline.transform()
-    print(df.head())
-    
-    metadata = pipeline.load_metadata()
-    print(metadata)
-    print(df.head())
-    print(df.info())

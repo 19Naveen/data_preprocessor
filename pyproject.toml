@@ -1,0 +1,30 @@
+[build-system]
+requires = [
+    "setuptools>=42",
+    "wheel"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lazyprep"
+version = "0.1.2"
+description = "An efficient data preprocessing tool for data science"
+authors = [
+    { name = "NaveenkumarD", email = "naveenkumar19082004@gmail.com" }
+]
+readme = "README.md"
+requires-python = ">=3.6"
+dependencies = [
+    "pandas>=1.3",
+    "scikit-learn>=1.0",
+    "numpy>=1.21",
+    "chardet>=4.0",
+    "fitter>=1.5",
+    "nltk>=3.6"
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from Utilities.logger import setup_logger
+from .Utilities.logger import setup_logger
 from typing import Optional
 logger = setup_logger(log_file='pipeline.log', __name__=__name__)
 
@@ -171,6 +171,6 @@ class Outlier:
 	
 		logger.info(f"Outlier detection and removal completed. Total Removed rows {count-len(df)}")
 		return df
-	
+
 
 

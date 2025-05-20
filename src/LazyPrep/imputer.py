@@ -6,7 +6,7 @@ from sklearn.impute import IterativeImputer, KNNImputer
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import BayesianRidge, LinearRegression
 from sklearn.cluster import KMeans
-from Utilities.logger import setup_logger
+from .Utilities.logger import setup_logger
 from typing import Optional
 
 logger = setup_logger(log_file='pipeline.log', __name__=__name__)
